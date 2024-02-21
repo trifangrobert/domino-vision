@@ -1,25 +1,50 @@
-Your project should include a README file containing the following information:
+# Double Double Dominoes Game CLI
 
-1. the libraries required to run the project including the full version of each library
+## Description
+The `game.py` script is a command-line tool for interacting with Double Double Dominoes games. It allows you to process game images, load configurations (board cleaning, extracting dominoes, cleaning dominoes) and test game moves validity.
 
-Example:
+## Dependencies
 
-numpy==1.15.4
-opencv_python==4.1.1.26
-scikit_image==0.15.0
-tensorflow_gpu==1.12.0
-Pillow==7.0.0
-scikit_learn==0.22.1
-skimage==0.0
-tensorflow==2.1.0
+To run the script, you need to have the following packages installed:
 
-2. how to run each task and where to look for the output file.
+- python==3.x
+- numpy==1.26.2
+- opencv-python==4.8.1.78
+- tqdm==4.66.1
 
-Example:
+You can install these dependencies using `pip` with the following command:
 
-Task 1: 
-script: task_1.py
-function: run_task1(input_folder_name), where input_folder_name is the path to the folder containing the images for task1
-output: the output file is results/task1.txt
+```bash
+$ pip install -r requirements.txt
+```
 
-Task 2: ...
+## Usage
+- Game data path should be provided as a command line argument. This path should contain images in the following format: `<game_index>_<move_index>.jpg` and `<game_index>_mutari.txt`.
+- Configurations should be stored in the same folder as the script.
+    - `board_config.pickle` - board cleaning configuration
+    - `extract_domino_config.pickle` - domino extraction configuration
+    - `clean_domino_config.pickle` - domino cleaning configuration
+
+
+### Options for `game.py`
+- `-p`, `--game_path` (required): Specifies the path to the game images.
+- `-g`, `--game_index` (required): Sets the game index to be processed.
+- `-b`, `--board_config`: Path to the board configuration file. Defaults to `board_config.pickle`.
+- `-d`, `--extract_domino_config`: Path to the domino extraction configuration file. Defaults to `extract_domino_config.pickle`.
+- `-c`, `--clean_domino_config`: Path to the clean domino configuration file. Defaults to `clean_domino_config.pickle`.
+- `-t`, `--test`: Runs the game correctness check. This does not require a value.
+- `-s`, `--save_game_path`: If specified, saves the game moves as txt to the provided path.
+
+### Examples
+To process a game with the minimum required options using default configs:
+
+```bash
+$ python game.py -p path/to/game_files/ -g 1
+```
+---
+
+To process a game with the minimum required options and save the moves to a txt file:
+
+```bash
+$ python game.py -p path/to/game_files/ -g 1 -s path/to/save/
+```
